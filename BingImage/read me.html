@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Read me - Bing Image</title>
+    <style>
+        body {
+            width:1024px;
+            margin:0 auto;
+        }
+
+        #code_container {
+            background-color: #cccccc;
+            padding:10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>BingImage</h1>
+
+    <p>BingImage is simple Api for retrieving Bing image of the day. Image of the day comes with various resolutions suitable for mobile and wide screens.</p>
+
+    <h2>External dependencies</h2>
+
+    <ul>
+        <li><a href="http://www.newtonsoft.com/json">Newtonsoft - Json.NET</a> (included in project)</li>
+    </ul>
+
+    <h2>Classes</h2>
+   
+    <ul>
+        <li>BingImage</li>
+        <li>BingImageProperties</li>
+        <li>BingImageResolutions</li>
+        <li>BingImageUtilities</li>
+    </ul>
+
+    <h2>Example of usage</h2>
+   <div id="code_container">
+       <code>
+           WebClient client = new WebClient();
+           <br />
+           client.Encoding = Encoding.UTF8;
+           <br />
+           <br />
+           string json;
+           <br />
+           string imageUri;
+           <br />
+           <br />
+           json = client.DownloadString(BingImage.BingApi);
+           <br />
+           BingImage image = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;BingImage&gt;(json);
+           <br />
+           imageUri = image.GetUri();
+           <br />
+           image.SetResolution(BingImageResolutions.WideScreenRes_16_9._1366x768);
+           <br />
+           <br />
+           byte[] rawBytes = client.DownloadData(imageUri);
+       </code>
+   </div>
+
+</body>
+</html>
